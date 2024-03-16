@@ -1,59 +1,53 @@
-package com.zipcodewilmington.phonebook;
+    package com.zipcodewilmington.phonebook;
 
-import java.util.*;
-//import java.util.HashMap;
-/**
- * Created by leon on 1/23/18.
- * Made WAY better by kristofer 6/16/20
- */
-public class PhoneBook {
+    import java.util.*;
+    //import java.util.HashMap;
+    /**
+     * Created by leon on 1/23/18.
+     * Made WAY better by kristofer 6/16/20
+     */
+    public class PhoneBook {
+        private final Map<String, List<String>> phonebook;
+        public PhoneBook(Map<String, List<String>> map) {
+            this.phonebook = map;
+        }
+        public PhoneBook() {
+            phonebook = new LinkedHashMap<>();
+        }
+        public void add(String name, String phoneNumber) {
+            phonebook.put(name, Collections.singletonList(phoneNumber));
+        }
+        public void addAll(String name, String... phoneNumbers) {
+            phonebook.put(name, List.of(phoneNumbers));
+        }
+        public void remove(String name) {
+            phonebook.remove(name);
+        }
+        public Boolean hasEntry(String name,String phoneNumber) {
+            boolean result=false;
+            if(phonebook.get(name)!=null&&phonebook.get(name).contains(phoneNumber)){
+                result= true;
+            }
+        return result;
+        }
+        public List<String> lookup(String name) {
+           return this.phonebook.get(name);
 
-    private final Map<String, List<String>> phonebook;
+        }
+        public String reverseLookup(String phoneNumber) {
+            String name = "";
+            for (Map.Entry<String, List<String>> num : phonebook.entrySet()) {
+                if (num.getValue().contains(phoneNumber)) {
+                    name = num.getKey();
+                }
+            }
+            return name;
+        }
+        public List<String> getAllContactNames() {
+             return new ArrayList<>(phonebook.keySet());
 
-    public PhoneBook(Map<String, List<String>> map) {
-        this.phonebook = new LinkedHashMap<>();
+        }
+        public Map<String, List<String>> getMap() {
+            return this.phonebook;
+        }
     }
-
-    public PhoneBook() {
-        this.phonebook=new LinkedHashMap<>();
-    }
-
-    public void add(String name, String phoneNumber) {
-        this.phonebook.put(name, Collections.singletonList(phoneNumber));
-    }
-
-    public void addAll(String name, String... phoneNumbers) {
-    this.phonebook.put(name, List.of(phoneNumbers));
-
-    }
-
-    public void remove(String name) {
-        phonebook.remove(name);
-    }
-
-    public Boolean hasEntry(String name) {
-        phonebook.entrySet();
-        return null;
-    }
-
-    public List<String> lookup(String name) {
-        phonebook.containsKey(name);
-        return null;
-    }
-
-    public String reverseLookup(String phoneNumber)  {
-
-        return null;
-    }
-
-    public List<String> getAllContactNames() {
-        
-        return null;
-    }
-
-    public Map<String, List<String>> getMap() {
-        this.phonebook.get();
-
-        return null;
-    }
-}
